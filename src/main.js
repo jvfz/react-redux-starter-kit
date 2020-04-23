@@ -1,22 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import createStore from './store/createStore'
+import {createStore} from "redux"
 import './styles/main.scss'
+import './styles/dialog.scss'
+
+import GameContainer from "./game/containers/GameContainer"
+import GameReducer from "./game/reducers/game"
 
 // Store Initialization
 // ------------------------------------
-const store = createStore(window.__INITIAL_STATE__)
+const store = createStore(GameReducer)
 
 // Render Setup
 // ------------------------------------
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-  const App = require('./components/App').default
-  const routes = require('./routes/index').default(store)
 
   ReactDOM.render(
-    <App store={store} routes={routes} />,
+    <GameContainer store={store} />,
     MOUNT_NODE
   )
 }
